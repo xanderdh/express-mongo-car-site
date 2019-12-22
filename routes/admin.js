@@ -1,5 +1,7 @@
 const {Router} = require('express');
 const isAuthenticated = require('./isAdminLoggedIn');
+const bcrypt = require('bcrypt');
+const Admin = require('../models/Admin');
 
 const router = Router();
 
@@ -15,17 +17,34 @@ router.get('/admin/login', isAuthenticated, async (req, res) => {
 router.post('/admin/login', isAuthenticated, async (req, res) => {
   console.log(req.body);
 
-  // TODO: tmp condition
-  const passIsCorrect = req.body.name === '1' && req.body.password === '1';
+  // const saltRounds = 10;
+  // bcrypt.hash("admin", saltRounds, async (err, hash) => {
+  //   console.log(hash)
+  //
+  //   const admin = new Admin({
+  //     name: "admin",
+  //     password: hash
+  //   });
+  //
+  //   // await admin.save()
+  // });
 
-  if (passIsCorrect) {
-    req.session.role = 'admin';
-    res.redirect('/admin')
+
+  const adminUser = await Admin.find({name: req.body.name});
+
+  if (adminUser.length) {
+    bcrypt.compare(req.body.password, adminUser[0].password, (err, passwordStatus) => {
+      if (passwordStatus) {
+        req.session.role = 'admin';
+        res.redirect('/admin')
+      }
+    });
   } else {
     res.render('pages/admin/admin_login', {
       name: req.body.name
     })
   }
+
 });
 
 module.exports = router;

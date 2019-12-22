@@ -2,7 +2,7 @@ module.exports = function isAuthenticated(req, res, next) {
   const role = req.session && req.session.role;
 
   if (role === 'admin') {
-    return next();   
+    return next();
   }
 
   if (req.url === '/admin/login') {
