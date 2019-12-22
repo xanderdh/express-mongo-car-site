@@ -1,0 +1,31 @@
+block variables
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title #{title}
+    meta(content="" name="author")
+    meta(content="" name="description")
+    meta(content="" name="keywords")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    meta(content="ie=edge" http-equiv="x-ua-compatible")
+    meta(name="format-detection" content="telephone=no")
+
+    // favicon block start
+    link(rel="icon" href="favicon.ico" type="image/x-icon")
+    link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
+    // favicon block end
+
+    link(rel="stylesheet" href="/css/main.css")
+    link(rel="stylesheet" href="/css/add.css")
+
+  body
+    #svg-sprite-container(style='height: 0; width: 0; position: absolute;overflow: hidden;')
+
+    include header/header
+    block content
+
+    block script
+      script(src='/js/vendor.js')
+      script(src='/js/main.js')

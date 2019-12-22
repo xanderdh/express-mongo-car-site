@@ -1,0 +1,4 @@
+.idea
+.env
+/__markup/
+/node_modules/

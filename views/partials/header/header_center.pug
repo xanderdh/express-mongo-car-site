@@ -1,0 +1,18 @@
+.container
+  .header__center
+    a.header__logo(href='/')
+      img(src='/pic/logo.png' alt='')
+      span.header__logo-descr
+        span.header__logo-descr-num 27
+        span.header__logo-descr-text лет успеха на рынке
+    nav.header__nav.js-nav
+      ul.header__nav-list
+        each item in header.navList
+          li.header__nav-list-item
+            a.header__nav-link(href=item.href class=`${item.active ? 'active': ''}`)= item.title
+    .header__nav-burger.js-nav-burger
+
+
+
+
+      

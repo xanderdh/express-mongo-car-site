@@ -1,0 +1,30 @@
+header.header.header--index
+  .header__top
+    .container
+      a.header__credit-btn(href='#')
+        svg.icon-percent3
+          use(xlink:href='#percent')
+        | заявка на кредит от 3,9%
+      .header__location
+        span.header__location-label Ваш город:&nbsp;
+        span.header__location-drop-link Москва
+      .header__contacts
+        .header__contacts-address
+          span.header__contacts-text
+            svg.icon-pin
+              use(xlink:href='#pin')
+            span Рязанский проспект 7Д
+          a.header__contacts-link(href='/') Схема проезда
+        .header__contacts-phones
+          .header__contacts-phones-item
+            span.header__contacts-text.header__contacts-text--gray
+              svg.icon-phone
+                use(xlink:href='#phone')
+              span Без выходных: с 9-00 до 21-00
+            a.header__contacts-phone(href='tel:+7 (495) 927 01 76') +7 (000) 000 01 01
+          .header__contacts-phones-item
+            span.header__contacts-text.header__contacts-text--divider.header__contacts-text--gray Бесплатно по России
+            a.header__contacts-phone(href='tel:8 800 555 72 77') 8 800 000 00 01
+        a.header__contacts-link(href='/') Обратный звонок
+  include ./header_center
+  include ./header_catalog
