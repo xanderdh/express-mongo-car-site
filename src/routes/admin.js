@@ -1,12 +1,18 @@
 const {Router} = require('express');
-const isAuthenticated = require('./isAdminLoggedIn');
+const isAuthenticated = require('../routes/isAdminLoggedIn');
 const bcrypt = require('bcrypt');
 const Admin = require('../models/Admin');
 
 const router = Router();
 
-router.get('/admin', isAuthenticated, async (req, res) => {
+const incorrectPassword = (req, res) => {
+  res.render('pages/admin/admin_login', {
+    name: req.body.name,
+    isError: true
+  })
+};
 
+router.get('/admin', isAuthenticated, async (req, res) => {
   res.render('pages/admin/admin')
 });
 
@@ -15,20 +21,22 @@ router.get('/admin/login', isAuthenticated, async (req, res) => {
 });
 
 router.post('/admin/login', isAuthenticated, async (req, res) => {
-  console.log(req.body);
 
+  // Add admin to DB
+
+  // const name = 'admin'
+  // const password = 'admin'
   // const saltRounds = 10;
-  // bcrypt.hash("admin", saltRounds, async (err, hash) => {
+  // bcrypt.hash(password, saltRounds, async (err, hash) => {
   //   console.log(hash)
   //
   //   const admin = new Admin({
-  //     name: "admin",
+  //     name,
   //     password: hash
   //   });
   //
   //   // await admin.save()
   // });
-
 
   const adminUser = await Admin.find({name: req.body.name});
 
@@ -37,14 +45,18 @@ router.post('/admin/login', isAuthenticated, async (req, res) => {
       if (passwordStatus) {
         req.session.role = 'admin';
         res.redirect('/admin')
+      } else {
+        incorrectPassword(req, res)
       }
     });
   } else {
-    res.render('pages/admin/admin_login', {
-      name: req.body.name
-    })
+    incorrectPassword(req, res)
   }
+});
 
+router.get('/admin/logout', async (req, res) => {
+  req.session.role = 'user';
+  res.redirect('/')
 });
 
 module.exports = router;

@@ -7,11 +7,13 @@ block content
       br
       .row.justify-content-md-center
         .col.col-sm-6
+          if(isError)
+            .alert.alert-danger(role='alert') User name or password are incorrect
           form(action="/admin/login" method="POST")
             .form-group
               label(for='formGroupExampleInput') Admin Name
               input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name' value=name)
             .form-group
               label(for='formGroupExampleInput2') Admin Password
-              input#formGroupExampleInput2.form-control(type='password' name='password' placeholder='Password')
+              input#formGroupExampleInput2.form-control(type='password' name='password' placeholder='Password' autofocus=isError && !!name)
             button.btn.btn-primary(type="submit") Submit

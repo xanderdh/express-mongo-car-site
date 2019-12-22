@@ -5,8 +5,8 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const homeRoutes = require('./routes/home');
-const adminRoutes = require('./routes/admin');
+const homeRoutes = require('./src/routes/home');
+const adminRoutes = require('./src/routes/admin');
 
 dotenv.config();
 
@@ -17,7 +17,7 @@ const PASS = process.env.PASS;
 const app = express();
 
 app.set('view engine', 'pug');
-app.set('views', 'views');
+app.set('views', 'src/views');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
