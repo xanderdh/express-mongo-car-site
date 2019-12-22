@@ -5,7 +5,7 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  type: {
+  manufacturer: {
     type: String,
     required: true
   },
@@ -15,4 +15,4 @@ const schema = new Schema({
   }
 });
 
-module.exports = model('CarType', schema);
+module.exports = model('CarManufacturer', schema);
