@@ -13,7 +13,7 @@ const incorrectPassword = (req, res) => {
   })
 };
 
-router.get('/admin', isAuthenticated, async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
   const adminList = await Admin.find({});
 
   res.render('pages/admin/admin', {
@@ -23,20 +23,20 @@ router.get('/admin', isAuthenticated, async (req, res) => {
   })
 });
 
-router.get('/admin/car-types', isAuthenticated, async (req, res) => {
+router.get('/car-types', isAuthenticated, async (req, res) => {
   res.render('pages/admin/car_type', {isCarTypesPage: true})
 });
 
-router.get('/admin/login', isAuthenticated, async (req, res) => {
+router.get('/login', isAuthenticated, async (req, res) => {
   res.render('pages/admin/admin_login')
 });
 
-router.get('/admin/logout', async (req, res) => {
+router.get('/logout', async (req, res) => {
   req.session.role = 'user';
   res.redirect('/')
 });
 
-router.post('/admin/login', isAuthenticated, async (req, res) => {
+router.post('/login', isAuthenticated, async (req, res) => {
   const adminUser = await Admin.find({name: req.body.name});
 
   if (adminUser.length) {
@@ -54,7 +54,7 @@ router.post('/admin/login', isAuthenticated, async (req, res) => {
   }
 });
 
-router.post('/admin/add-new-admin', isAuthenticated, async (req, res) => {
+router.post('/add-new-admin', isAuthenticated, async (req, res) => {
   const name = req.body.name;
   const password = req.body.password;
   

@@ -30,7 +30,7 @@ app.use(session({
 }));
 
 app.use(homeRoutes);
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 
 const start = async () => {
   try {

@@ -5,7 +5,7 @@ module.exports = function isAuthenticated(req, res, next) {
     return next();
   }
 
-  if (req.url === '/admin/login') {
+  if (req.url === '/login') {
     return next();
   } else {
     res.redirect('/admin/login');
