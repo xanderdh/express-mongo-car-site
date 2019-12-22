@@ -2,5 +2,23 @@ extends ../../partials/_admin_template
 
 block content
   include ../../partials/admin/header
-  h1.text-center Hello admin
-  h4.text-center some important info will be here
+  .container
+    h1.text-center 
+      span Hello&nbsp;
+      span= adminUser
+    .row
+      .col.col-sm-8
+        h5 Admin list
+        ol
+          each admin in adminList
+            li= admin.name
+      .col.col-sm-4
+        h5 Add new admin
+        form(action="/admin/add-new-admin" method="POST")
+          .form-group
+            label(for='formGroupExampleInput') Admin Name
+            input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name' value=name)
+          .form-group
+            label(for='formGroupExampleInput2') Admin Password
+            input#formGroupExampleInput2.form-control(type='password' name='password' placeholder='Password')
+          button.btn.btn-primary(type="submit") Submit

@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
     
     return newEl
   });
-
   
   res.render('pages/index', {
     title: 'Home page', 
