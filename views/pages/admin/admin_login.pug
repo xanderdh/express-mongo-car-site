@@ -1,0 +1,17 @@
+extends ../../partials/_admin_template
+
+block content
+  .admin__login-container
+    .container
+      h1.text-center Please log in
+      br
+      .row.justify-content-md-center
+        .col.col-sm-6
+          form(action="/admin/login" method="POST")
+            .form-group
+              label(for='formGroupExampleInput') Admin Name
+              input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name' value=name)
+            .form-group
+              label(for='formGroupExampleInput2') Admin Password
+              input#formGroupExampleInput2.form-control(type='password' name='password' placeholder='Password')
+            button.btn.btn-primary(type="submit") Submit

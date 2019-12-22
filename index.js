@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const homeRoutes = require('./routes/home');
 const path = require('path');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+const homeRoutes = require('./routes/home');
+const adminRoutes = require('./routes/admin');
 
 dotenv.config();
 
@@ -15,8 +19,18 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
-app.use(homeRoutes);
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'application_secret',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(homeRoutes);
+app.use(adminRoutes);
 
 const start = async () => {
   try {

@@ -1,0 +1,24 @@
+block variables
+
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title #{title}
+    meta(content="" name="author")
+    meta(content="" name="description")
+    meta(content="" name="keywords")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    meta(content="ie=edge" http-equiv="x-ua-compatible")
+    meta(name="format-detection" content="telephone=no")
+
+    // favicon block start
+    link(rel="icon" href="favicon.ico" type="image/x-icon")
+    link(rel="shortcut icon" href="favicon.ico" type="image/x-icon")
+    // favicon block end
+
+    link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+    link(rel="stylesheet" href="/css/admin.css")
+  body
+    block content
+
