@@ -13,7 +13,11 @@ const incorrectPassword = (req, res) => {
 };
 
 router.get('/admin', isAuthenticated, async (req, res) => {
-  res.render('pages/admin/admin')
+  res.render('pages/admin/admin', {isHomePage: true})
+});
+
+router.get('/admin/car-types', isAuthenticated, async (req, res) => {
+  res.render('pages/admin/car_type', {isCarTypesPage: true})
 });
 
 router.get('/admin/login', isAuthenticated, async (req, res) => {

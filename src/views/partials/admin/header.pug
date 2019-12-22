@@ -1,5 +1,6 @@
 .header
   .container
     nav.nav.nav-pills.flex-column.flex-sm-row
-      a.flex-sm-fill.text-sm-center.nav-link.active(href='/admin') Home
+      a.flex-sm-fill.text-sm-center.nav-link(href='/admin' class=`${isHomePage && 'active'}`) Home
+      a.flex-sm-fill.text-sm-center.nav-link(href='/admin/car-types' class=`${isCarTypesPage && 'active'}`) Edit car types
       a.flex-sm-fill.text-sm-center.nav-link(href='/admin/logout' tabindex='-1' aria-disabled='true') Logout
