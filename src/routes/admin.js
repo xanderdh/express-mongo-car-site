@@ -57,10 +57,10 @@ router.post('/login', isAuthenticated, async (req, res) => {
 router.post('/add-new-admin', isAuthenticated, async (req, res) => {
   const name = req.body.name;
   const password = req.body.password;
-  
+
   const exitAdmin = await Admin.find({name});
-  
-  if(!exitAdmin.length) {
+
+  if (!exitAdmin.length) {
     bcrypt.hash(password, saltRounds, async (err, hash) => {
       const admin = new Admin({
         name,
