@@ -4,4 +4,12 @@ block content
   include ../../partials/admin/header
   
   .container
-    h1.text-center car type page
+    .custom-file
+      form
+        .form-row
+          .form-group.col-md-6
+            label(for='formGroupExampleInput') Admin Name
+            input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name')
+          .form-group.col-md-6
+            input#customFile.custom-file-input(type='file')
+            label.custom-file-label(for='customFile') Choose file
