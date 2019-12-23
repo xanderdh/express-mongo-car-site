@@ -12,8 +12,21 @@ block content
           form(action="/admin/login" method="POST")
             .form-group
               label(for='formGroupExampleInput') Admin Name
-              input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name' value=name autofocus=!name)
+              input#formGroupExampleInput.form-control(
+                type='text'
+                name='name'
+                placeholder='Name'
+                value=name
+                autofocus=!name
+                class=`${isError ? "is-invalid" : ''}`
+              )
             .form-group
               label(for='formGroupExampleInput2') Admin Password
-              input#formGroupExampleInput2.form-control(type='password' name='password' placeholder='Password' autofocus=isError && !!name)
+              input#formGroupExampleInput2.form-control(
+                type='password'
+                name='password'
+                placeholder='Password'
+                autofocus=isError && !!name
+                class=`${isError ? "is-invalid" : ''}`
+              )
             button.btn.btn-primary(type="submit") Submit
