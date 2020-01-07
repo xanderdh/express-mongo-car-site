@@ -30,4 +30,18 @@ block content
           if (inNotImage)
             .text-danger Selected file should be .png or .jpg image
       button.btn.btn-primary(type="submit") Add car manufacture
-        
+    table.table.table-hover.mt-4
+      thead
+        tr
+          th №
+          th Title
+          th Logo
+          th Remove
+      tbody
+        each item, index in manufacturerList
+          tr
+            td.align-middle= index
+            td.align-middle= item.title
+            td.align-middle
+              img(src=item.imgUrl width='100' height='50')
+            td.align-middle X
