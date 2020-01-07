@@ -2,6 +2,7 @@ const {Router} = require('express');
 const isAuthenticated = require('./isAdminLoggedIn');
 const path = require('path');
 const uuid = require('uuid');
+const CarManufacturer = require('../../models/CarManufacturer');
 
 const router = Router();
 
@@ -17,18 +18,33 @@ router.get('/', isAuthenticated, async (req, res) => {
   res.render('pages/admin/car_type', {isCarTypesPage: true})
 });
 
-router.post('/add-car-manufacture', async (req, res) => {
+router.post('/add-car-manufacture', isAuthenticated, async (req, res) => {
+  const name = req.body.name;
+  
+  if(!name) {
+    return res.render('pages/admin/car_type', {
+      isCarTypesPage: true,
+      isNoName: true,
+    })
+  }
+  
   if (!req.files || Object.keys(req.files).length === 0) {
-    console.log('No files were uploaded.');
-    return;
+    return res.render('pages/admin/car_type', {
+      isCarTypesPage: true,
+      isNoFile: true,
+      name,
+    })
   }
 
   const file = req.files.manufactureLogo;
   const fileType = file.mimetype;
 
   if (!isImageMimetype(fileType)) {
-    console.log('File is not image');
-    return;
+    return res.render('pages/admin/car_type', {
+      isCarTypesPage: true,
+      inNotImage: true,
+      name,
+    })
   }
 
   const fileName = genFileName(fileType);

@@ -8,9 +8,26 @@ block content
     form(action="/admin/car-types/add-car-manufacture" method="POST" encType="multipart/form-data")
       .form-row.mt-2
         .form-group.col-md-6
-          input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Manufacture name')
+          input#formGroupExampleInput.form-control(
+            type='text'
+            name='name'
+            placeholder='Manufacture name'
+            class=`${isNoName ? 'is-invalid' : ''}`
+            value=name
+          )
+          if (isNoName)
+            .text-danger Please enter the car manufacturer name
+
         .form-group.col-md-6.custom-file
-          input#file.custom-file-input(type='file', name='manufactureLogo')
+          input#file.custom-file-input(
+            type='file'
+            name='manufactureLogo'
+            class=`${inNotImage || isNoFile ? 'is-invalid' : ''}`
+          )
           label.custom-file-label(for='file') Manufacture logo 
+          if (isNoFile)
+            .text-danger Please select the car manufacturer logo
+          if (inNotImage)
+            .text-danger Selected file should be .png or .jpg image
       button.btn.btn-primary(type="submit") Add car manufacture
         
