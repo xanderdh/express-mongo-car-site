@@ -1,7 +1,8 @@
 const {Router} = require('express');
-const isAuthenticated = require('../routes/isAdminLoggedIn');
+const isAuthenticated = require('./isAdminLoggedIn');
 const bcrypt = require('bcrypt');
-const Admin = require('../models/Admin');
+const Admin = require('../../models/Admin');
+const carTypes = require('./carTypes');
 
 const router = Router();
 const saltRounds = 10;
@@ -13,6 +14,8 @@ const incorrectPassword = (req, res) => {
   })
 };
 
+router.use('/car-types', carTypes);
+
 router.get('/', isAuthenticated, async (req, res) => {
   const adminList = await Admin.find({});
 
@@ -21,10 +24,6 @@ router.get('/', isAuthenticated, async (req, res) => {
     adminUser: req.session.adminName,
     adminList
   })
-});
-
-router.get('/car-types', isAuthenticated, async (req, res) => {
-  res.render('pages/admin/car_type', {isCarTypesPage: true})
 });
 
 router.get('/login', isAuthenticated, async (req, res) => {

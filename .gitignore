@@ -2,3 +2,4 @@
 .env
 /__markup/
 /node_modules/
+/public/upload/

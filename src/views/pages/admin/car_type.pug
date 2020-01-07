@@ -2,14 +2,15 @@ extends ../../partials/_admin_template
 
 block content
   include ../../partials/admin/header
-  
+
   .container
-    .custom-file
-      form
-        .form-row
-          .form-group.col-md-6
-            label(for='formGroupExampleInput') Admin Name
-            input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Name')
-          .form-group.col-md-6
-            input#customFile.custom-file-input(type='file')
-            label.custom-file-label(for='customFile') Choose file
+    h2.mt-4 Car manufacture
+    form(action="/admin/car-types/add-car-manufacture" method="POST" encType="multipart/form-data")
+      .form-row.mt-2
+        .form-group.col-md-6
+          input#formGroupExampleInput.form-control(type='text' name='name' placeholder='Manufacture name')
+        .form-group.col-md-6.custom-file
+          input#file.custom-file-input(type='file', name='manufactureLogo')
+          label.custom-file-label(for='file') Manufacture logo 
+      button.btn.btn-primary(type="submit") Add car manufacture
+        

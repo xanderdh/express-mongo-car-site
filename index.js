@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 const path = require('path');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const homeRoutes = require('./src/routes/home');
-const adminRoutes = require('./src/routes/admin');
+const adminRoutes = require('./src/routes/admin/admin');
 
 dotenv.config();
 
@@ -18,6 +19,10 @@ const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', 'src/views');
+
+app.use(fileUpload({
+  createParentPath: true
+}));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
