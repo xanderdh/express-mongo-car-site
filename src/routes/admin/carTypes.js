@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const isAuthenticated = require('./isAdminLoggedIn');
 const path = require('path');
 const uuid = require('uuid');
@@ -28,6 +28,14 @@ router.get('/', isAuthenticated, async (req, res) => {
       ...await getEditCarPageData()
     }
   )
+});
+
+router.post('/delete-car-manufacture', isAuthenticated, async (req, res) => {
+  CarManufacturer.remove({_id: req.body.id}, err => {
+    if (!err) {
+      res.redirect('/admin/car-types')
+    }
+  })
 });
 
 router.post('/add-car-manufacture', isAuthenticated, async (req, res) => {
