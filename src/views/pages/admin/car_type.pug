@@ -44,4 +44,7 @@ block content
             td.align-middle= item.title
             td.align-middle
               img(src=item.imgUrl width='100' height='50')
-            td.align-middle X
+            td.align-middle
+              form(method="POST" action="/admin/car-types/delete-car-manufacture")
+                input(type="hidden" name="id" value=item._id)
+                button.btn.btn-danger(type="submit") Delete
