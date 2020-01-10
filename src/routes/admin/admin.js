@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const isAuthenticated = require('./isAdminLoggedIn');
 const bcrypt = require('bcrypt');
 const Admin = require('../../models/Admin');
@@ -36,7 +36,7 @@ router.get('/logout', async (req, res) => {
 });
 
 router.post('/login', isAuthenticated, async (req, res) => {
-  const adminUser = await Admin.find({name: req.body.name});
+  const adminUser = await Admin.find({ name: req.body.name });
 
   if (adminUser.length) {
     bcrypt.compare(req.body.password, adminUser[0].password, (err, passwordStatus) => {
@@ -57,7 +57,7 @@ router.post('/add-new-admin', isAuthenticated, async (req, res) => {
   const name = req.body.name;
   const password = req.body.password;
 
-  const exitAdmin = await Admin.find({name});
+  const exitAdmin = await Admin.find({ name });
 
   if (!exitAdmin.length) {
     bcrypt.hash(password, saltRounds, async (err, hash) => {

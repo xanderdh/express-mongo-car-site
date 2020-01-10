@@ -31,7 +31,7 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 router.post('/delete-car-manufacture', isAuthenticated, async (req, res) => {
-  CarManufacturer.remove({_id: req.body.id}, err => {
+  CarManufacturer.remove({ _id: req.body.id }, err => {
     if (!err) {
       res.redirect('/admin/car-types')
     }
