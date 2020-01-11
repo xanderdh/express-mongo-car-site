@@ -3,6 +3,7 @@ const isAuthenticated = require('./isAdminLoggedIn');
 const path = require('path');
 const uuid = require('uuid');
 const CarManufacturer = require('../../models/CarManufacturer');
+const fs = require('fs');
 const _ = require('lodash');
 
 const router = Router();
@@ -32,9 +33,18 @@ router.get('/', isAuthenticated, async (req, res) => {
 });
 
 router.post('/delete-car-manufacture', isAuthenticated, async (req, res) => {
-  CarManufacturer.remove({ _id: req.body.id }, err => {
+  const _id = req.body.id;
+  const itemToRemoveList = await CarManufacturer.find({ _id });
+  const itemToRemove = itemToRemoveList[0];
+
+  CarManufacturer.deleteOne({ _id }, err => {
     if (!err) {
-      res.redirect('/admin/car-types')
+      if (itemToRemove) {
+        const imageToDelete = path.join(__dirname, '../../../', 'public', itemToRemove.imgUrl);
+        fs.unlink(imageToDelete, () => {
+          res.redirect('/admin/car-types')
+        })
+      }
     }
   })
 });
