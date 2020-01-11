@@ -4,7 +4,7 @@ const Nav = require('../../models/Nav');
 
 const headerDataCache = new NodeCache();
 
-const SECONDS_IN_HOUR = 86400;
+const CACHE_LIFE = 600;
 
 module.exports = async (req, res, next) => {
   let headerData = headerDataCache.get('headerData');
@@ -22,7 +22,7 @@ module.exports = async (req, res, next) => {
 
     headerData = { navList, carManufacturerList };
 
-    headerDataCache.set('headerData', headerData, SECONDS_IN_HOUR);
+    headerDataCache.set('headerData', headerData, CACHE_LIFE);
   }
 
   res.locals.headerData = headerData;

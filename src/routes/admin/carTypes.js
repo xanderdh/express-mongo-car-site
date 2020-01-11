@@ -3,6 +3,7 @@ const isAuthenticated = require('./isAdminLoggedIn');
 const path = require('path');
 const uuid = require('uuid');
 const CarManufacturer = require('../../models/CarManufacturer');
+const _ = require('lodash');
 
 const router = Router();
 
@@ -77,7 +78,7 @@ router.post('/add-car-manufacture', isAuthenticated, async (req, res) => {
 
     const newManufacturer = new CarManufacturer({
       title: name,
-      manufacturer: name,
+      manufacturer: _.toLower(name),
       imgUrl: `/upload/${fileName}`
     });
 
