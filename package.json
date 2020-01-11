@@ -16,6 +16,7 @@
     "express-fileupload": "^1.1.6",
     "express-session": "^1.17.0",
     "mongoose": "^5.8.2",
+    "node-cache": "^5.1.0",
     "pug": "^2.0.4",
     "uuid": "^3.3.3"
   },

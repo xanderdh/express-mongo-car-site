@@ -1,22 +1,15 @@
 const { Router } = require('express');
-const Nav = require('../../models/Nav');
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const dbNavList = await Nav.find({});
-
-  const navList = dbNavList.map(el => {
-    const newEl = el;
-    newEl.active = false;
-
-    return newEl
-  });
+  console.log(res.locals);
+  const { navList } = res.locals.headerData;
 
   res.render('pages/index', {
     title: 'Home page',
     header: {
-      hasBodiesLing: true,
+      hasBodiesLink: true,
       navList
     }
   });
