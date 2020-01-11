@@ -1,5 +1,5 @@
-const {Router} = require('express');
-const Nav = require('../models/Nav');
+const { Router } = require('express');
+const Nav = require('../../models/Nav');
 
 const router = Router();
 

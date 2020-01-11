@@ -5,9 +5,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
-const homeRoutes = require('./src/routes/home');
-const adminRoutes = require('./src/routes/admin/admin');
+const routes = require('./src/routes');
 
 dotenv.config();
 
@@ -24,7 +22,7 @@ app.use(fileUpload({
   createParentPath: true
 }));
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
@@ -34,8 +32,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-app.use(homeRoutes);
-app.use('/admin', adminRoutes);
+app.use(routes);
 
 const start = async () => {
   try {
