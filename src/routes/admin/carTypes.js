@@ -7,6 +7,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 const router = Router();
+const PUBLIC_DIR = path.join(__dirname, '../../../', 'public');
 
 const isImageMimetype = (mimetype) => {
   return mimetype === 'image/jpeg' || mimetype === 'image/png'
@@ -40,7 +41,7 @@ router.post('/delete-car-manufacture', isAuthenticated, async (req, res) => {
   CarManufacturer.deleteOne({ _id }, err => {
     if (!err) {
       if (itemToRemove) {
-        const imageToDelete = path.join(__dirname, '../../../', 'public', itemToRemove.imgUrl);
+        const imageToDelete = path.join(PUBLIC_DIR, itemToRemove.imgUrl);
         fs.unlink(imageToDelete, () => {
           res.redirect('/admin/car-types')
         })
@@ -79,7 +80,7 @@ router.post('/add-car-manufacture', isAuthenticated, async (req, res) => {
   }
 
   const fileName = genFileName(fileType);
-  const filePath = path.join(__dirname, '../../../', 'public', 'upload', fileName);
+  const filePath = path.join(PUBLIC_DIR, 'upload', fileName);
 
   file.mv(filePath, async err => {
     if (err) {
