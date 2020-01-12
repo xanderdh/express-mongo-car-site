@@ -14,6 +14,18 @@ const incorrectPassword = (req, res) => {
   })
 };
 
+const setAdminSession = (req, res, name) => {
+  req.session.role = 'admin';
+  req.session.adminName = name;
+  res.redirect('/admin')
+};
+
+const isNoAdmins = async () => {
+  const adminList = await Admin.find({});
+
+  return !adminList.length;
+};
+
 router.use('/car-types', carTypes);
 
 router.get('/', isAuthenticated, async (req, res) => {
@@ -41,15 +53,17 @@ router.post('/login', isAuthenticated, async (req, res) => {
   if (adminUser.length) {
     bcrypt.compare(req.body.password, adminUser[0].password, (err, passwordStatus) => {
       if (passwordStatus) {
-        req.session.role = 'admin';
-        req.session.adminName = adminUser[0].name;
-        res.redirect('/admin')
+        setAdminSession(req, res, adminUser[0].name)
       } else {
         incorrectPassword(req, res)
       }
     });
   } else {
-    incorrectPassword(req, res)
+    if (await isNoAdmins()) {
+      setAdminSession(req, res, "no-admin");
+    } else {
+      incorrectPassword(req, res);
+    }
   }
 });
 
