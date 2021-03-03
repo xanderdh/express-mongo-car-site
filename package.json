@@ -18,7 +18,7 @@
     "lodash": "^4.17.19",
     "mongoose": "^5.8.2",
     "node-cache": "^5.1.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
